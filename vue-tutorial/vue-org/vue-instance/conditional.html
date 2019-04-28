@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>vue 条件渲染--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- will render 'The condition is true' into the DOM -->
+    <div id="example-01">
+        <h1 v-if="a">The condition is true</h1>
+    </div>
+    <div id="example-02">
+        <template v-if="b">
+            <h1>Heading</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+    </div>
+    <div id="example-03">
+        <h1 v-if="b">IF</h1>
+        <h1 v-else="a">ELSE</h1>
+    </div>
+    <div id="example-04">
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
+    </div>
+    <!-- 用 key 管理可复用的元素 -->
+    <div id="example-05">
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+        </template>
+    </div>
+    <div id="example-06">
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+        </template>
+    </div>
+
+
+
+
+</body>
+<script>
+    var vm01 = new Vue({
+        el: '#example-01',
+        data: {
+            a: true,
+            b: false
+        }
+    });
+    new Vue({
+        el: '#example-02',
+        data: {
+            a: true,
+            b: false
+        }
+    });
+    new Vue({
+        el: '#example-03',
+        data: {
+            a: true,
+            b: false
+        }
+    });
+    new Vue({
+        el: '#example-04',
+        data: {
+            a: true,
+            b: false
+        }
+    });
+</script>
+
+</html>

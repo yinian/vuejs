@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>vue 自定义事件--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="components-01">
+        <base-checkbox v-model="lovingVue"></base-checkbox>
+    </div>
+</body>
+<script>
+    Vue.component('base-checkbox', {
+        model: {
+            prop: 'checked',
+            event: 'change'
+        },
+        props: {
+            checked: Boolean
+        },
+        template: `
+    <input type="checkbox" v-bind:checked="checked" v-on:change="$emit('change', $event.target.checked)">
+    `
+    })
+</script>
+
+</html>

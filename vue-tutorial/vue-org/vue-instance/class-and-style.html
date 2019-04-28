@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>vue Class和Style绑定--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- 绑定对象 -->
+    <div id="app-01">
+        <div class="static" :class="{'active':isActive,error:isError}">
+            123
+        </div>
+    </div>
+    <!-- 数组语法 -->
+    <div id="app-02">
+        <div class="static" :class="[activeCls,errorCls]">
+            123
+        </div>
+    </div>
+    <!-- 绑定内联样式 -->
+    <div id="app-03">
+        <div :style="styles">
+            123
+        </div>
+    </div>
+
+
+
+
+</body>
+<script>
+    var vm01 = new Vue({
+        el: '#app-01',
+        data: {
+            isActive: true,
+            isError: true
+        }
+    });
+    var vm02 = new Vue({
+        el: '#app-02',
+        data: {
+            isActive: true,
+            isError: true
+        }
+    });
+    new Vue({
+        el: '#app-03',
+        data: {
+            styles: {
+                color: 'red',
+                fontSize: '28px'
+            }
+        }
+    });
+</script>
+
+</html>

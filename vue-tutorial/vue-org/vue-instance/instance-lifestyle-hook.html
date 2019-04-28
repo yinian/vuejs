@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>vue 实例生命周期钩子--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app-10">
+        <p>{{message }}</p>
+    </div>
+    <div id="app-11">
+        <component :is="type"></component>
+        <button @click="btnclick">toggle</button>
+    </div>
+    <!-- v-html指令 -->
+    <div id="app-12">
+        <p id="a12">Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html directive: </p>
+    </div>
+    <div id="app-13">
+        <p id="a13" v-html="rawHtml">Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html directive: </p>
+    </div>
+    <!-- v-bind 指令带参数 -->
+    <div id="app-14">
+        <a v-bind:href="url">click me</a>
+    </div>
+    <!-- v-bind 动态指令参数 -->
+    <div id="app-15">
+        <input @[eventName]="event" />
+        <button @click="eventName='change'">change</button>
+        <button @click="eventName='focus'">focus</button>
+        <button @click="eventName=1">1</button>
+    </div>
+    <template>
+        <div>
+            <input @[eventName]="event" />
+            <button @click="eventName='change'">change</button>
+            <button @click="eventName='focus'">focus</button>
+            <button @click="eventName=1">1</button>
+
+        </div>
+    </template>
+
+
+</body>
+<script>
+    var app10 = new Vue({
+        el: '#app-10',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+
+    let child1 = { // v-once 会把组件缓存，提高静态组件的效率
+        template: '<div v-once>child-one</div>'
+    }
+    var app11 = new Vue({
+        el: '#app-11',
+        data: {
+            type: "child1"
+        },
+        methods: {
+            btnclick: function() {
+                this.type = (this.type === "child1" ? "child2" : "child1")
+            }
+        },
+        components: {
+            child1
+        }
+    });
+    var a12 = new Vue({
+        el: "#app-12", //绑定的元素
+        data: {
+            rawHtml: '<span style="color:red;">利用vue添加了插入一个span 元素</span>' //元素内数据代码 message
+        }
+    });
+    var a13 = new Vue({
+        el: "#app-13", //绑定的元素
+        data: {
+            rawHtml: '<span style="color:red;">利用vue添加了插入一个span 元素</span>' //元素内数据代码 message
+        }
+    });
+    var app14 = new Vue({
+        el: '#app-14', //element
+        data: {
+            url: 'http://baidu.com'
+        }
+    });
+    var app15 = new Vue({
+        el: '#app-15', //element
+        data(): {
+            return {
+                eventName: ''
+            }
+        }
+    });
+</script>
+
+</html>

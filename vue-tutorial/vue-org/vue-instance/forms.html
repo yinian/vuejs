@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <title>vue 表单输入绑定--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="demo-01">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </div>
+    <div id="demo-02">
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+    <div id="demo-03">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+    </div>
+    <div id='demo-04'>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <div id="demo-05">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <div id="demo-06">
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <div id="demo-07">
+        <select v-model="selected" multiple style="width: 50px;">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <br>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <!-- 用 v-for 渲染的动态选项 -->
+    <div id="demo-08">
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <span>Selected: {{selected }}</span>
+    </div>
+</body>
+<script>
+    var demo01 = new Vue({
+        el: '#demo-01',
+        data: {
+            message: 100,
+        }
+    })
+    var demo02 = new Vue({
+        el: '#demo-02',
+        data: {
+            message: 100,
+        }
+    })
+    var demo03 = new Vue({
+        el: '#demo-03',
+        data: {
+            checked: false,
+        }
+    })
+    var demo04 = new Vue({
+        el: '#demo-04',
+        data: {
+            checkedNames: []
+        }
+    });
+    new Vue({
+        el: '#demo-05',
+        data: {
+            picked: ''
+        }
+    });
+    0
+    new Vue({
+        el: '#demo-07',
+        data: {
+            selected: []
+        }
+    })
+    new Vue({
+        el: '#demo-08',
+        data: {
+            selected: 'A',
+            options: [{
+                text: 'One',
+                value: 'A'
+            }, {
+                text: 'Two',
+                value: 'B'
+            }, {
+                text: 'Three',
+                value: 'C'
+            }]
+        }
+    });
+</script>
+
+</html>

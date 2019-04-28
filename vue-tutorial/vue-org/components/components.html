@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <title>vue 组件基础--声明式渲染</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="components-01">
+        <button-counter></button-counter>
+    </div>
+    <div id="components-02">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <!-- 通过prop向子组件传递参数 -->
+    <div id="components-03">
+        <child message="hello!"></child>
+    </div>
+    <div id="components-04">
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+    </div>
+    <div id="blog-post-demo">
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+    </div>
+
+    <!-- 插槽 -->
+    <div id="slot-01">
+        <child-component>你好</child-component>
+    </div>
+    <div id="slot-02">
+        <child-slot>
+            <template slot="girl">
+          漂亮、美丽、购物、逛街
+        </template>
+            <template slot="boy">
+          帅气、才实
+        </template>
+            <div>
+                我是一类人， 我是默认的插槽
+            </div>
+        </child-slot>
+    </div>
+    <!-- 动态组件 -->
+    <div id="dynamic-01">
+        <button @click="change">切换页面</button>
+        <component :is="currentView"></component>
+    </div>
+</body>
+<script>
+    var home = {
+        template: "<div>我是主页</div>"
+    };
+    var post = {
+        template: "<div>我是提交页</div>"
+    };
+    var archive = {
+        template: "<div>我是存档页</div>"
+    };
+    new Vue({
+        el: "#dynamic-01",
+        components: {
+            home,
+            post,
+            archive
+        },
+        data: {
+            index: 0,
+            arr: ["home", "post", "archive"]
+        },
+        computed: {
+            currentView() {
+                return this.arr[this.index];
+            }
+        },
+        methods: {
+            change() {
+                this.index = ++this.index % 3;
+            }
+        }
+    });
+    // 定义一个名为`button-counter`的新组件
+    Vue.component("button-counter", {
+        data: function() {
+            return {
+                count: 0
+            };
+        },
+        template: '<button v-on:click="count++">You clicked me {{count }} times.</button>'
+    });
+    new Vue({
+        el: "#components-01"
+    });
+    new Vue({
+        el: "#components-02"
+    });
+    // 注册
+    Vue.component("child", {
+        //声明props
+        props: ["message"],
+        //   // 同样也可以在 vm 实例中像 “this.message” 这样使用
+        template: "<span>{{message }}</span>"
+    });
+    new Vue({
+        el: "#components-03"
+    });
+    Vue.component("blog-post", {
+        props: ["title"],
+        template: "<h3>{{ title }}</h3>"
+    });
+    new Vue({
+        el: "#components-04"
+    });
+    new Vue({
+        el: "#blog-post-demo",
+        data: {
+            posts: [{
+                id: 1,
+                title: "My journey with Vue"
+            }, {
+                id: 2,
+                title: "Blogging with Vue"
+            }, {
+                id: 3,
+                title: "Why Vue is so fun"
+            }]
+        }
+    });
+    new Vue({
+        el: "#blog-posts-events-demo",
+        data: {
+            posts: [
+                /* ... */
+            ],
+            postFontSize: 1
+        }
+    });
+    Vue.component("blog-post", {
+        props: ["post"],
+        template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <button v-on:click="$emit('enlarge-text')">
+        Enlarge text
+        </button>
+      <div v-html="post.content"></div>
+    </div>
+  `
+    });
+    Vue.component("child-component", {
+        template: `<div>Hello,World!
+            <slot></slot></div>`
+    });
+    let vmSlots = new Vue({
+        el: "#slot-01",
+        data: {}
+    });
+    Vue.component("child-slot", {
+        template: `
+            <div>
+            <h4>这个世界不仅有男人和女人</h4>
+            <slot name="girl"></slot>
+            <div style="height:1px;background-color:red;"></div>
+            <slot name="boy"></slot>
+            <div style="height:1px;background-color:red;"></div>
+            <slot></slot></div>`
+    });
+    let vmSlot2 = new Vue({
+        el: "#slot-02",
+        data: {}
+    });
+</script>
+
+</html>
