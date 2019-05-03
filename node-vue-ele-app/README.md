@@ -10,3 +10,12 @@ ui：(Element)[https://element.eleme.cn/#/zh-CN]
 DB：(mongoDB)[https://www.mongodb.com/]
 
 ## 主要功能
+
+## 启动项目
+
+```js
+npm run dev
+```
+
+前后端项目都起来了
+前端访问地址：http://localhost:8080/index
