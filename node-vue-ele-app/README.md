@@ -10,7 +10,7 @@ ui：(Element)[https://element.eleme.cn/#/zh-CN]
 DB：(mongoDB)[https://www.mongodb.com/]
 
 ## 主要功能
-!(详情)[https://img-blog.csdnimg.cn/2019050400022041.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3OTQxNDgz,size_16,color_FFFFFF,t_70]
+![详情](https://img-blog.csdnimg.cn/2019050400022041.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3OTQxNDgz,size_16,color_FFFFFF,t_70)
 
 ## 启动项目
 
